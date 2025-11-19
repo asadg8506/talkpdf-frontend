@@ -23,12 +23,19 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  /* margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  body { */
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  /* display:flex;  <-- REMOVE */
+  /* place-items:center; <-- REMOVE */
 }
+
 
 h1 {
   font-size: 3.2em;
@@ -54,6 +61,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* FIX START — put these outside the media query */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+/* FIX END */
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -66,3 +81,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
