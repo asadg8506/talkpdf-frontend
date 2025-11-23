@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
- "scripts": {
-  "dev": "vite",
-  "build": "cross-env ROLLUP_DISABLE_NATIVE=1 vite build",
-  "preview": "vite preview",
-  "lint": "eslint .",
-  "postinstall": "npm rebuild esbuild"
+  "scripts": {
+    "dev": "vite",
+    "build": "cross-env ROLLUP_DISABLE_NATIVE=1 vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "postinstall": "npm rebuild esbuild"
   },
   "dependencies": {
     "react": "^19.1.1",
@@ -17,6 +17,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "cross-env": "^10.1.0"
+    "@vitejs/plugin-react": "^5.1.1",
+    "cross-env": "^10.1.0",
+    "vite": "^7.2.4"
   }
 }

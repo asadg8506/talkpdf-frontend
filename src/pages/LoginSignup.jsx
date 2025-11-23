@@ -51,6 +51,7 @@ export default function LoginSignupPage() {
 // ------------------ Styles ------------------ //
 const pageStyle = {
   minHeight: '100vh',
+  width: '100vw',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

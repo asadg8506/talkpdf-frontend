@@ -55,7 +55,8 @@ const pageStyle = {
 
 // Container for form
 const containerStyle = {
-  width: '450px',
+  width: '90%',           // previously 450px
+  maxWidth: '450px',      // maintain max width for large screens
   padding: '40px',
   border: '1px solid #00ff15ff',
   borderRadius: '50px',
