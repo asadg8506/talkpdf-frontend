@@ -3,13 +3,12 @@ import Login from './Login';
 import Signup from './Signup';
 
 export default function LoginSignupPage() {
-  const [showForm, setShowForm] = useState(false); // initially sirf welcome dikhana hai
+  const [showForm, setShowForm] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
 
   return (
     <div style={pageStyle}>
       {!showForm ? (
-        // -------- WELCOME SCREEN --------
         <div style={welcomeStyle}>
           <h1 style={{ color: '#00ff15', fontSize: '2.5rem' }}>Welcome to TalkPDF</h1>
           <p style={{ color: 'white', fontSize: '1.2rem', marginBottom: '30px' }}>
@@ -31,7 +30,6 @@ export default function LoginSignupPage() {
           </div>
         </div>
       ) : (
-        // -------- LOGIN OR SIGNUP FORM --------
         <div>
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
             <button onClick={() => setIsLogin(true)} style={tabButtonStyle}>
@@ -48,10 +46,9 @@ export default function LoginSignupPage() {
   );
 }
 
-// ------------------ Styles ------------------ //
+// Styles
 const pageStyle = {
   minHeight: '100vh',
-  width: '100vw',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -87,3 +84,4 @@ const tabButtonStyle = {
   color: '#00ff15',
   cursor: 'pointer'
 };
+

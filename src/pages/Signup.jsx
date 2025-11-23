@@ -3,51 +3,21 @@ import React from 'react';
 export default function Signup() {
   return (
     <div style={pageStyle}>
-      <div className="signup-container" style={containerStyle}>
+      <div style={containerStyle}>
         <h1 style={{ ...titleStyle, color: '#00ff15' }}>Signup</h1>
-
-        <form className="signup-form" style={formStyle}>
-          {/* First Name */}
+        <form style={formStyle}>
           <label htmlFor="fname" style={{ ...labelStyle, color: '#00ff15' }}>First Name:</label>
-          <input
-            type="text"
-            id="fname"
-            name="fname"
-            placeholder="Enter your first name"
-            style={inputStyle}
-          />
+          <input type="text" id="fname" placeholder="Enter your first name" style={inputStyle} />
 
-          {/* Last Name */}
           <label htmlFor="lname" style={{ ...labelStyle, color: '#00ff15' }}>Last Name:</label>
-          <input
-            type="text"
-            id="lname"
-            name="lname"
-            placeholder="Enter your last name"
-            style={inputStyle}
-          />
+          <input type="text" id="lname" placeholder="Enter your last name" style={inputStyle} />
 
-          {/* Email */}
           <label htmlFor="email" style={{ ...labelStyle, color: '#00ff15' }}>Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            style={inputStyle}
-          />
+          <input type="email" id="email" placeholder="Enter your email" style={inputStyle} />
 
-          {/* Password */}
           <label htmlFor="password" style={{ ...labelStyle, color: '#00ff15' }}>Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            style={inputStyle}
-          />
+          <input type="password" id="password" placeholder="Enter your password" style={inputStyle} />
 
-          {/* Signup Button */}
           <button type="submit" style={buttonStyle}>Signup</button>
         </form>
       </div>
@@ -55,8 +25,7 @@ export default function Signup() {
   );
 }
 
-// ---------------- Inline Styles ---------------- //
-
+// Styles
 const pageStyle = {
   minHeight: '100vh',
   display: 'flex',
@@ -66,30 +35,20 @@ const pageStyle = {
 };
 
 const containerStyle = {
-  width: '90%',           // previously 450px
-  maxWidth: '450px',      // maintain max width for large screens
+  width: '450px',
   padding: '40px',
-  border: '1px solid #00ff15ff',
+  border: '1px solid #00ff15',
   borderRadius: '50px',
   boxShadow: '0 0 15px rgba(0, 110, 255, 1)',
   textAlign: 'center',
   backgroundColor: '#414142ff'
 };
 
-const titleStyle = {
-  marginBottom: '30px'
-};
+const titleStyle = { marginBottom: '30px' };
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '15px'
-};
+const formStyle = { display: 'flex', flexDirection: 'column', gap: '15px' };
 
-const labelStyle = {
-  textAlign: 'left',
-  fontWeight: 'bold'
-};
+const labelStyle = { textAlign: 'left', fontWeight: 'bold' };
 
 const inputStyle = {
   padding: '10px',
