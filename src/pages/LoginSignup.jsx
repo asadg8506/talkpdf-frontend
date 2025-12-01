@@ -2,86 +2,40 @@ import React, { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
 
+// Tailwind classes
+const page = "min-h-screen flex justify-center items-center bg-[#011616ff] text-center";
+const card = "p-12 rounded-2xl border-2 border-[#00ff15] shadow-[0_0_15px_rgba(0,255,100,0.8)] bg-[#1c1c1c]";
+const title = "text-[#00ff15] text-4xl mb-4";
+const text = "text-white text-lg mb-8";
+const btn = "px-6 py-2.5 rounded-lg font-bold text-white bg-[#007bff] hover:opacity-90 transition";
+const btnAlt = "px-6 py-2.5 rounded-lg font-bold text-black bg-[#00ff15] hover:opacity-90 transition ml-5";
+const tab = "px-5 py-2 rounded-lg border border-[#00ff15] bg-[#2b2b2b] text-[#00ff15] font-medium hover:opacity-90 transition";
+
 export default function LoginSignupPage() {
-  const [showForm, setShowForm] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [show, setShow] = useState(false);
+  const [login, setLogin] = useState(true);
 
   return (
-    <div style={pageStyle}>
-      {!showForm ? (
-        <div style={welcomeStyle}>
-          <h1 style={{ color: '#00ff15', fontSize: '2.5rem' }}>Welcome to TalkPDF</h1>
-          <p style={{ color: 'white', fontSize: '1.2rem', marginBottom: '30px' }}>
-            Your AI-powered PDF assistant
-          </p>
-          <div>
-            <button
-              style={buttonStyle}
-              onClick={() => { setIsLogin(true); setShowForm(true); }}
-            >
-              Login
-            </button>
-            <button
-              style={{ ...buttonStyle, marginLeft: '20px', backgroundColor: '#00ff15', color: '#000' }}
-              onClick={() => { setIsLogin(false); setShowForm(true); }}
-            >
-              Signup
-            </button>
-          </div>
+    <div className={page}>
+      {!show ? (
+        <div className={card}>
+          <h1 className={title}>Welcome to TalkPDF</h1>
+          <p className={text}>Your AI-powered PDF assistant</p>
+          <button className={btn} onClick={() => { setLogin(true); setShow(true); }}>Login</button>
+          <button className={btnAlt} onClick={() => { setLogin(false); setShow(true); }}>Signup</button>
         </div>
       ) : (
-        <div>
-          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-            <button onClick={() => setIsLogin(true)} style={tabButtonStyle}>
-              Login
-            </button>
-            <button onClick={() => setIsLogin(false)} style={tabButtonStyle}>
-              Signup
-            </button>
-          </div>
-          {isLogin ? <Login /> : <Signup />}
+        <div className="w-full max-w-md">
+          <div className="flex justify-center mb-5">
+           <button onClick={() => { setLogin(true); console.log("login true"); }} className={tab}>Login</button>
+           <button onClick={() => { setLogin(false); console.log("login false"); }} className={tab}>Signup</button>
+        </div>
+
+          {login ? <Login /> : <Signup />}
         </div>
       )}
     </div>
   );
 }
 
-// Styles
-const pageStyle = {
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: '#011616ff',
-  textAlign: 'center'
-};
-
-const welcomeStyle = {
-  padding: '50px',
-  borderRadius: '20px',
-  border: '2px solid #00ff15',
-  boxShadow: '0 0 15px rgba(0, 255, 100, 0.8)',
-  backgroundColor: '#1c1c1c',
-};
-
-const buttonStyle = {
-  padding: '10px 25px',
-  borderRadius: '8px',
-  border: 'none',
-  backgroundColor: '#007bff',
-  color: 'white',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-  fontSize: '1rem',
-};
-
-const tabButtonStyle = {
-  padding: '10px 20px',
-  margin: '0 10px',
-  borderRadius: '8px',
-  border: '1px solid #00ff15',
-  backgroundColor: '#2b2b2b',
-  color: '#00ff15',
-  cursor: 'pointer'
-};
 
