@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Semantic Tailwind classes
 const pageContainer = "min-h-screen flex justify-center items-center bg-[#011616ff]";
@@ -9,22 +9,45 @@ const labelField = "text-left font-bold text-[#00ff15]";
 const submitButton = "p-2.5 rounded bg-[#007bff] text-white font-bold cursor-pointer";
 
 export default function Signup() {
+
+  const [f_name, setFName]     = useState("");
+  const [l_name, setLname]     = useState("");
+  const [email, setEmail]      = useState("");
+  const [password,setPassword] = useState("");
+  const handleSignup = async(e) => {e.preventDefault();
+    try { const res = await fetch("http://127.0.0.1:5000/signup",{
+      method: "POST",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify({f_name,l_name,email,password}),
+    });
+  
+  const data = await res.json();
+  if(data.message){
+    alert("signup successful!");
+  }
+  else {
+    alert(data.error || "signup failed");
+  }}
+  catch (err){
+    alert("server error");
+    console.error(err);
+  }};
   return (
     <div className={pageContainer}>
       <div className={cardContainer}>
         <h1 className="mb-7 text-3xl font-bold text-[#00ff15]">Signup</h1>
-        <form className={formContainer}>
+        <form className={formContainer} onSubmit={handleSignup}>
           <label className={labelField}>First Name:</label>
-          <input type="text" placeholder="Enter your first name" className={inputField} />
+          <input type="text" placeholder="Enter your first name" className={inputField} value={f_name} onChange={(e) => setFName(e.target.value)} />
 
           <label className={labelField}>Last Name:</label>
-          <input type="text" placeholder="Enter your last name" className={inputField} />
+          <input type="text" placeholder="Enter your last name" className={inputField} value={l_name} onChange={(e) => setLname(e.target.value)}/>
 
           <label className={labelField}>Email:</label>
-          <input type="email" placeholder="Enter your email" className={inputField} />
+          <input type="email" placeholder="Enter your email" className={inputField} value={email} onChange={(e) => setEmail(e.target.value)}/>
 
           <label className={labelField}>Password:</label>
-          <input type="password" placeholder="Enter your password" className={inputField} />
+          <input type="password" placeholder="Enter your password" className={inputField} value={password} onChange={(e) => setPassword(e.target.value)}/>
 
           <button type="submit" className={submitButton}>Signup</button>
         </form>
