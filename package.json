@@ -2,6 +2,7 @@
   "name": "talkpdf-frontend",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "cross-env ROLLUP_DISABLE_NATIVE=1 vite build",
