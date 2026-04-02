@@ -1,3 +1,4 @@
+// src/pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -16,10 +17,9 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
-
   const validate = () => {
     let newErrors = {};
 
@@ -39,6 +39,7 @@ export default function Login() {
     e.preventDefault();
 
     if (!validate()) return;
+    setLoading(true);
 
     try {
       await login(email, password);
@@ -47,6 +48,8 @@ export default function Login() {
       alert("Invalid email or password");
       console.error(err);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -57,11 +60,14 @@ export default function Login() {
           <label className={labelField}>Email:</label>
           <input type="email" className={inputField} value={email} onChange={(e) => setEmail(e.target.value)}/>
           {errors.email && <p className={errorText}>{errors.email}</p>}
+
           <label className={labelField}>Password:</label>
           <input type="password" className={inputField} value={password} onChange={(e) => setPassword(e.target.value)}/>
           {errors.password && <p className={errorText}>{errors.password}</p>}
+
           <p className={forgotStyle}>
             <a href="#" className={linkStyle}> Forgot Password? </a>
           </p>
-          <button type="submit" className={submitButton}>Login</button>
-          </form></div></div>);}
+
+          <button type="submit" className={submitButton} disabled={loading}> {loading ? "Logging in..." : "Login"}</button>
+        </form> </div> </div> ); }

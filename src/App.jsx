@@ -3,7 +3,9 @@ import LoginSignup from "./pages/LoginSignup";
 import Dashboard from "./pages/Dashboard";
 import UploadPDF from "./pages/UploadPDF";
 import AskQuestion from "./pages/AskQuestion";
+import ChatHistory from "./pages/ChatHistory";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 export default function App() {
   return (
@@ -34,6 +36,14 @@ export default function App() {
           <ProtectedRoute>
             <AskQuestion />
           </ProtectedRoute>
+        }
+      />
+
+      <Route path="/history"
+        element={
+        <ProtectedRoute>
+          <ChatHistory />
+        </ProtectedRoute>
         }
       />
 

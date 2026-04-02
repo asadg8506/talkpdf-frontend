@@ -1,3 +1,4 @@
+//navbar
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -23,5 +24,6 @@ export default function Navbar() {
         <Link to="/dashboard" className={location.pathname === "/dashboard" ? activeLink : normalLink}>Dashboard</Link>
         <Link to="/upload" className={location.pathname === "/upload"? activeLink : normalLink}>Upload</Link>
         <Link to="/ask" className={location.pathname === "/ask"? activeLink : normalLink}>Ask</Link>
+        <Link to="/history" className={location.pathname === "/history" ? activeLink : normalLink}>History</Link>
         <button onClick={handleLogout} className={logoutButton}>Logout</button>
       </div></div>);}

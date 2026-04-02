@@ -1,3 +1,4 @@
+/// src/pages/UploadPDF.jsx
 import { useState } from "react";
 import { uploadPDF } from "../api/pdf.api";
 import Navbar from "../components/Navbar";
@@ -6,8 +7,7 @@ export default function UploadPDF() {
 
   const [file, setFile] = useState(null);
   const [msg, setMsg] = useState("");
-
-
+  const [loading, setLoading] = useState(false);
 
   const pageContainer ="min-h-screen flex flex-col bg-[#011616ff]";
   const contentWrapper ="flex flex-1 justify-center items-center px-6";
@@ -17,12 +17,14 @@ export default function UploadPDF() {
   const buttonStyle ="px-6 py-2 rounded bg-[#007bff] text-white font-semibold cursor-pointer hover:bg-blue-700 transition duration-200";
   const messageStyle = "mt-6 text-[#00ff15] font-medium";
 
-  // ===== Upload Handler =====
   const handleUpload = async () => {
+
     if (!file) return;
 
     const formData = new FormData();
     formData.append("pdf", file);
+
+    setLoading(true);
 
     try {
       const res = await uploadPDF(formData);
@@ -30,16 +32,36 @@ export default function UploadPDF() {
     } catch {
       setMsg("Upload failed");
     }
+
+    setLoading(false);
   };
 
   return (
-    <div className={pageContainer}> <Navbar />
+    <div className={pageContainer}>
+      <Navbar />
+
       <div className={contentWrapper}>
         <div className={contentBox}>
-          <h2 className={headingStyle}>Upload Your PDF </h2>
-          <input type="file" accept=".pdf" onChange={(e) => setFile(e.target.files[0])} className={inputStyle} />
-          <button onClick={handleUpload} className={buttonStyle}> Upload </button>
-          {msg && ( <p className={messageStyle}> {msg} </p> )}
-        </div> </div> </div> );}
+          <h2 className={headingStyle}>Upload Your PDF</h2>
 
+          <input
+            type="file"
+            accept=".pdf"
+            onChange={(e) => setFile(e.target.files[0])}
+            className={inputStyle}
+          />
 
+          <button
+            onClick={handleUpload}
+            disabled={loading}
+            className={buttonStyle}
+          >
+            {loading ? "Uploading..." : "Upload"}
+          </button>
+
+          {msg && <p className={messageStyle}>{msg}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,3 +1,4 @@
+//auth.api.js
 import api from "./axios";
 
 export const loginAPI = (data) => {
@@ -11,3 +12,5 @@ export const signupAPI = (data) => {
 export const logoutAPI = () => {
   return api.post("/logout");
 };
+
+

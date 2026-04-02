@@ -1,6 +1,6 @@
+// src/context/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
-import { setToken, getToken, removeToken } from "../utils/token";
-import { loginAPI, logoutAPI } from "../api/auth.api";
+import { loginAPI, logoutAPI } from "../api/auth.api"; 
 
 const AuthContext = createContext();
 
@@ -8,15 +8,20 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = getToken();
+    const token = localStorage.getItem("access_token"); 
     if (token) setIsAuthenticated(true);
   }, []);
 
+  
   const login = async (email, password) => {
     const res = await loginAPI({ email, password });
-    const token = res.data.access_token;
 
-    setToken(token);
+    const accessToken = res.data.access_token;
+    const refreshToken = res.data.refresh_token;
+
+    localStorage.setItem("access_token", accessToken);
+    localStorage.setItem("refresh_token", refreshToken);
+
     setIsAuthenticated(true);
   };
 
@@ -27,7 +32,9 @@ export const AuthProvider = ({ children }) => {
       console.log(err);
     }
 
-    removeToken();
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+
     setIsAuthenticated(false);
   };
 

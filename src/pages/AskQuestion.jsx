@@ -1,3 +1,4 @@
+/// src/pages/AskQuestion.jsx
 import { useState } from "react";
 import { askQuestion } from "../api/pdf.api";
 import Navbar from "../components/Navbar";
@@ -6,6 +7,7 @@ export default function AskQuestion() {
 
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const pageContainer = "min-h-screen flex flex-col bg-[#011616ff]";
   const contentArea = "flex-1 px-20 py-10 text-white";
@@ -15,19 +17,51 @@ export default function AskQuestion() {
   const answerStyle = "mt-8 text-gray-300 leading-relaxed";
 
   const handleAsk = async () => {
+
     if (!question) return;
-    setAnswer("Getting answer...");
+
+    setLoading(true);
+    setAnswer("Thinking...");
 
     try {
       const res = await askQuestion(question);
       setAnswer(res.data.answer);
-    } catch { setAnswer("No answer found"); } };
+    } catch {
+      setAnswer("No answer found");
+    }
+
+    setLoading(false);
+  };
 
   return (
-    <div className={pageContainer}> <Navbar />
+    <div className={pageContainer}>
+      <Navbar />
+
       <div className={contentArea}>
         <h2 className={headingStyle}>Ask Your PDF Anything</h2>
-        <textarea rows="1" placeholder="Type your question..." value={question} onChange={(e) => setQuestion(e.target.value)} className={textareaStyle}/>
-        <button onClick={handleAsk} className={buttonStyle}> Ask </button>
 
-        {answer && ( <p className={answerStyle}> {answer} </p> )} </div> </div> ); }
+        <textarea
+          rows="1"
+          placeholder="Type your question..."
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          className={textareaStyle}
+        />
+
+        <button
+          onClick={handleAsk}
+          disabled={loading}
+          className={buttonStyle}
+        >
+          {loading ? "Thinking..." : "Ask"}
+        </button>
+
+        {answer && <p className={answerStyle}>{answer}</p>}
+      </div>
+    </div>
+  );
+}
+
+
+
+
