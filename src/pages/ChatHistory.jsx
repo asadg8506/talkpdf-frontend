@@ -34,7 +34,7 @@ export default function ChatHistory() {
       <div className={contentArea}>
         <h2 className={headingStyle}>Chat History</h2>
         {loading ? ( <p>Loading...</p> ) : 
-        history.length === 0 ? ( <p>No history found</p> ) : 
+        history.length === 0 ? ( <p>SORRY, No history found..!</p> ) : 
         ( history.map((item, index) => (
             <div key={index} className={card}>
               <p className={question}>Q: {item.question}</p>
